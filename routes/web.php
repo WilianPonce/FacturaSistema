@@ -60,13 +60,13 @@ Route::get('/', function () {
     Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/listar', function () {
         return Inertia\Inertia::render('Administrar/Usuarios/Listar');
     })->name('administrar.usuarios.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/ver', function () {
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/{id}/ver', function () {
         return Inertia\Inertia::render('Administrar/Usuarios/Ver');
     })->name('administrar.usuarios.ver');
     Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/crear', function () {
         return Inertia\Inertia::render('Administrar/Usuarios/Crear');
     })->name('administrar.usuarios.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/editar', function () {
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/{id}/editar', function () {
         return Inertia\Inertia::render('Administrar/Usuarios/Editar');
     })->name('administrar.usuarios.editar');
 

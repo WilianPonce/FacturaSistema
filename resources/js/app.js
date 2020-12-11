@@ -11,7 +11,9 @@ import Vuesax from 'vuesax';
 import 'vuesax/dist/vuesax.css';
 import InfiniteLoading from 'vue-infinite-loading';
 import LaravelPermissionToVueJS from 'laravel-permission-to-vuejs';
+import AppLayout from './Layouts/AppLayout';
 
+Vue.component("AppLayout", AppLayout);
 Vue.use(LaravelPermissionToVueJS);
 Vue.use(Vuesax);
 Vue.mixin({ methods: { route } });

@@ -17,6 +17,9 @@
             AppLayout,
             Welcome,
             ModalJet,
+        },
+        mounted(){
+            console.log(route());
         }
     }
 </script>
