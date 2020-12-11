@@ -70,6 +70,8 @@ Route::get('/', function () {
         return Inertia\Inertia::render('Administrar/Usuarios/Editar');
     })->name('administrar.usuarios.editar');
 
+
+//pruebas pronto borrado
 Route::middleware(['auth:sanctum', 'verified'])->get('/usuarios', function () {
     return Inertia\Inertia::render('Usuarios/Visualizar');
 })->name('usuarios.visualizar');
