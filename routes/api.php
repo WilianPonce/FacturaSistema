@@ -33,3 +33,5 @@ use App\Http\Controllers\UsuariosController;
     Route::post("/administrar/puntos_emision/crear", [Puntos_emisionController::class, "crear"])->name("puntos_emision.crear")->middleware("permission:puntos_emision.crear");
     Route::put("/administrar/puntos_emision/editar", [Puntos_emisionController::class, "editar"])->name("puntos_emision.editar")->middleware("permission:puntos_emision.editar");
     Route::delete("/administrar/puntos_emision/eliminar/{id}", [Puntos_emisionController::class, "eliminar"])->name("puntos_emision.eliminar")->middleware("permission:puntos_emision.eliminar");
+
+    // este es un comentario de leo 
