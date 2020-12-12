@@ -41,5 +41,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ]);
         User::factory()->times(5)->create();
+
+        User::first()->assignRole(1);
+        User::find(2)->assignRole(1);
+        User::find(3)->assignRole(1);
+        User::find(4)->assignRole(1);
+        User::find(5)->assignRole(2);
     }
 }

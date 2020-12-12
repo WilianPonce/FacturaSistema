@@ -3760,8 +3760,7 @@ __webpack_require__.r(__webpack_exports__);
     Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__["default"],
     ModalJet: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  mounted: function mounted() {
-    console.log(route());
+  mounted: function mounted() {//this.$inertia.visit(route("administrar.usuarios.editar", 999));
   }
 });
 

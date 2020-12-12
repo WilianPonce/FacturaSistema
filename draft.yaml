@@ -1,0 +1,51 @@
+models:
+  Empresa:
+    periodo: date
+    razon_social: string
+    razon_comercial: string
+    ruc: string
+    direccion: string
+    telefono: string
+    email: string unique
+    email_password: string
+    email_server: string
+    email_port: string
+    email_security: string
+    obligado_contabilidad: boolean
+    contador_ruc: string
+    contador_nombre: string
+    representante_nombre: string
+    representante_ruc: string
+    periodo_inicio: date
+    periodo_fin: date
+    tipo_cuentas: string
+    logotipo: string
+    firma_electronica: string
+    firma_electronica_password: string
+    firma_electronica_expiracion: date
+    firma_electronica_actualizacion: date
+    tipo_emision: boolean
+    ambiente: boolean
+    facturar_negativo: boolean
+    id_moneda: id
+    id_provincia: id
+    id_ciudad: id
+    email_facturacion: string
+    leyenda_facturacion: string
+  Moneda:
+    nombre: string
+    valor: float
+    relationships:
+      hasMany: Empresa
+  Ciudad:
+    codigo: string
+    nombre: string
+    id_provincia: id
+    relationships:
+      hasMany: Empresa
+  Provinica:
+    codigo: string
+    nombre: string
+    relationships:
+      hasMany: Empresa, Ciudad
+

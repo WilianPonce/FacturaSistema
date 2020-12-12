@@ -16,29 +16,50 @@ class PermissonsSeeder extends Seeder
      */
     public function run()
     {    
-        Permission::create(["name"=>"usuarios.listar"]);
-        Permission::create(["name"=>"usuarios.ver"]);
-        Permission::create(["name"=>"usuarios.crear"]);
-        Permission::create(["name"=>"usuarios.editar"]);
-        Permission::create(["name"=>"usuarios.eliminar"]);
-        Permission::create(["name"=>"users.ver"]);
+        //Administración
+            //Empresa
+            Permission::create(["name"=>"empresa.listar"]);
+            Permission::create(["name"=>"empresa.ver"]);
+            Permission::create(["name"=>"empresa.crear"]);
+            Permission::create(["name"=>"empresa.editar"]);
+            Permission::create(["name"=>"empresa.eliminar"]);
 
+            //Establecimientos
+            Permission::create(["name"=>"establecimientos.listar"]);
+            Permission::create(["name"=>"establecimientos.ver"]);
+            Permission::create(["name"=>"establecimientos.crear"]);
+            Permission::create(["name"=>"establecimientos.editar"]);
+            Permission::create(["name"=>"establecimientos.eliminar"]);
 
-        Role::first()->givePermissionTo(1);
-        Role::first()->givePermissionTo(2);
-        Role::first()->givePermissionTo(3);
-        Role::first()->givePermissionTo(4);
-        Role::first()->givePermissionTo(5);
-        Role::first()->givePermissionTo(6);
+            //Puntos_emision
+            Permission::create(["name"=>"puntos_emision.listar"]);
+            Permission::create(["name"=>"puntos_emision.ver"]);
+            Permission::create(["name"=>"puntos_emision.crear"]);
+            Permission::create(["name"=>"puntos_emision.editar"]);
+            Permission::create(["name"=>"puntos_emision.eliminar"]);
 
-        Role::find(2)->givePermissionTo(1);
-        Role::find(2)->givePermissionTo(2);
-        Role::find(2)->givePermissionTo(6);
-
-        User::first()->assignRole(1);
-        User::find(2)->assignRole(1);
-        User::find(3)->assignRole(1);
-        User::find(4)->assignRole(1);
-        User::find(5)->assignRole(2);
+            //Usuarios
+            Permission::create(["name"=>"usuarios.listar"]);
+            Permission::create(["name"=>"usuarios.ver"]);
+            Permission::create(["name"=>"usuarios.crear"]);
+            Permission::create(["name"=>"usuarios.editar"]);
+            Permission::create(["name"=>"usuarios.eliminar"]);
+            
+            //Impuestos
+            Permission::create(["name"=>"impuestos.listar"]);
+            Permission::create(["name"=>"impuestos.ver"]);
+            Permission::create(["name"=>"impuestos.crear"]);
+            Permission::create(["name"=>"impuestos.editar"]);
+            Permission::create(["name"=>"impuestos.eliminar"]);
+        
+        foreach(range(1, 25) as $cont){
+            Role::first()->givePermissionTo(intval($cont));
+        }
+        foreach(range(1, 25, 5) as $cont){
+            Role::find(2)->givePermissionTo(intval($cont));
+        }
+        foreach(range(2, 25, 5) as $cont){
+            Role::find(2)->givePermissionTo(intval($cont));
+        }
     }
 }

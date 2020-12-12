@@ -19,7 +19,7 @@
             ModalJet,
         },
         mounted(){
-            console.log(route());
+            //this.$inertia.visit(route("administrar.usuarios.editar", 999));
         }
     }
 </script>

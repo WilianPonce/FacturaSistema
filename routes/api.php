@@ -4,11 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosController;
 
-//dashboard
-    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-        return $request->user();
-    });
-    
 //usuario Sesión
     Route::get("/ver", [UsuariosController::class, "ver"])->name("usuarios.ver")->middleware("permission:users.ver");
 
@@ -33,5 +28,17 @@ use App\Http\Controllers\UsuariosController;
     Route::post("/administrar/puntos_emision/crear", [Puntos_emisionController::class, "crear"])->name("puntos_emision.crear")->middleware("permission:puntos_emision.crear");
     Route::put("/administrar/puntos_emision/editar", [Puntos_emisionController::class, "editar"])->name("puntos_emision.editar")->middleware("permission:puntos_emision.editar");
     Route::delete("/administrar/puntos_emision/eliminar/{id}", [Puntos_emisionController::class, "eliminar"])->name("puntos_emision.eliminar")->middleware("permission:puntos_emision.eliminar");
+    
+    //Usuarios
+    Route::get("/administrar/usuarios/listar", [UsuariosController::class, "listar"])->name("usuarios.listar")->middleware("permission:usuarios.listar");
+    Route::get("/administrar/usuarios/ver", [UsuariosController::class, "ver"])->name("usuarios.ver")->middleware("permission:usuarios.ver");
+    Route::post("/administrar/usuarios/crear", [UsuariosController::class, "crear"])->name("usuarios.crear")->middleware("permission:usuarios.crear");
+    Route::put("/administrar/usuarios/editar", [UsuariosController::class, "editar"])->name("usuarios.editar")->middleware("permission:usuarios.editar");
+    Route::delete("/administrar/usuarios/eliminar/{id}", [UsuariosController::class, "eliminar"])->name("usuarios.eliminar")->middleware("permission:usuarios.eliminar");
 
-    // este es un comentario de leo 
+    //Impuestos
+    Route::get("/administrar/impuestos/listar", [ImpuestosController::class, "listar"])->name("impuestos.listar")->middleware("permission:impuestos.listar");
+    Route::get("/administrar/impuestos/ver", [ImpuestosController::class, "ver"])->name("impuestos.ver")->middleware("permission:impuestos.ver");
+    Route::post("/administrar/impuestos/crear", [ImpuestosController::class, "crear"])->name("impuestos.crear")->middleware("permission:impuestos.crear");
+    Route::put("/administrar/impuestos/editar", [ImpuestosController::class, "editar"])->name("impuestos.editar")->middleware("permission:impuestos.editar");
+    Route::delete("/administrar/impuestos/eliminar/{id}", [ImpuestosController::class, "eliminar"])->name("impuestos.eliminar")->middleware("permission:impuestos.eliminar");
