@@ -3,10 +3,17 @@ created:
     - database/factories/MonedaFactory.php
     - database/factories/CiudadFactory.php
     - database/factories/ProvinciaFactory.php
+<<<<<<< HEAD
     - database/migrations/2020_12_14_043346_create_empresas_table.php
     - database/migrations/2020_12_14_043347_create_monedas_table.php
     - database/migrations/2020_12_14_043348_create_ciudads_table.php
     - database/migrations/2020_12_14_043349_create_provincias_table.php
+=======
+    - database/migrations/2020_12_14_034417_create_empresas_table.php
+    - database/migrations/2020_12_14_034418_create_monedas_table.php
+    - database/migrations/2020_12_14_034419_create_ciudads_table.php
+    - database/migrations/2020_12_14_034420_create_provincias_table.php
+>>>>>>> d6814ffeea31b3a581a8079bb28cd89b0e48a5c9
     - app/Models/Empresa.php
     - app/Models/Moneda.php
     - app/Models/Ciudad.php

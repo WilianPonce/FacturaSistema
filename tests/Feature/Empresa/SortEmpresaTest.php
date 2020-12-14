@@ -68,6 +68,7 @@ class SortEmpresaTest extends TestCase
         ]);
     }
 
+    /** @test */
     public function it_cannot_sort_articles_by_uknow_fields()
     {
         $visitors = Empresa::truncate();

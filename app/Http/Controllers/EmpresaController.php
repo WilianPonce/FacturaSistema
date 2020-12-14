@@ -14,6 +14,7 @@ class EmpresaController extends Controller
         $empresa = Empresa::applySearchs()->applyFilters()->applySorts()->jsonPaginate(); 
         return EmpresaCollection::make($empresa);
     }
+    
     function show(Empresa $empresa){
         return EmpresaResource::make($empresa);
     }
