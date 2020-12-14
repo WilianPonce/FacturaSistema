@@ -23,12 +23,12 @@ class Moneda extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'valor' => 'decimal',
+        'valor' => 'decimal:6',
     ];
 
 
-    public function empresas()
+    public function empresa()
     {
-        return $this->hasMany(\App\Models\Empresa::class);
+        return $this->hasOne(\App\Models\Empresa::class);
     }
 }
