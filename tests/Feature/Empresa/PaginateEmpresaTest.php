@@ -11,9 +11,6 @@ class PaginateEmpresaTest extends TestCase
     /** @test */
     public function paginate()
     {
-        $visitors = Empresa::truncate();
-        $empresa = Empresa::factory()->times(10)->create();
-
         $url = route('empresa.index', ['page[size]' => 2, 'page[number]' => 3]);
 
         $response = $this->getJson($url);

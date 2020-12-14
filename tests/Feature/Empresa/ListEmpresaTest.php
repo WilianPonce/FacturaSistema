@@ -13,9 +13,6 @@ class ListEmpresaTest extends TestCase
     /** @test */
     public function can_fetch_single_empresa()
     {   
-        $visitors = Empresa::truncate();
-        $empresa = Empresa::factory()->create();
-
         $response = $this->getJson(route('empresa.show', $empresa));
         $response->assertJson([
             'data' => [
