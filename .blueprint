@@ -3,17 +3,20 @@ created:
     - database/factories/MonedaFactory.php
     - database/factories/CiudadFactory.php
     - database/factories/ProvinciaFactory.php
-    - database/migrations/2020_12_14_043346_create_empresas_table.php
-    - database/migrations/2020_12_14_043347_create_monedas_table.php
-    - database/migrations/2020_12_14_043348_create_ciudads_table.php
-    - database/migrations/2020_12_14_043349_create_provincias_table.php
+    - database/migrations/2020_12_14_065600_create_empresas_table.php
+    - database/migrations/2020_12_14_065601_create_monedas_table.php
+    - database/migrations/2020_12_14_065602_create_ciudads_table.php
+    - database/migrations/2020_12_14_065603_create_provincias_table.php
     - app/Models/Empresa.php
     - app/Models/Moneda.php
     - app/Models/Ciudad.php
     - app/Models/Provincia.php
 models:
+    Models\Membership: { team_id: 'biginteger unsigned', user_id: 'biginteger unsigned', role: 'string nullable' }
+    Models\Team: { user_id: 'biginteger unsigned', name: string, personal_team: boolean }
+    Models\User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, two_factor_secret: 'text nullable', two_factor_recovery_codes: 'text nullable', remember_token: 'string:100 nullable', current_team_id: 'biginteger unsigned nullable', profile_photo_path: 'text nullable' }
+    Models\Usuarios: { nombre: 'string:200', apellido: 'string:200 nullable', edad: 'integer nullable', direccion: 'string:200 nullable' }
     Empresa: { periodo: date, razon_social: string, razon_comercial: string, ruc: string, direccion: string, telefono: string, email: 'email unique', email_password: string, email_server: string, email_port: string, email_security: string, obligado_contabilidad: boolean, contador_nombre: 'string nullable', contador_ruc: 'string nullable', representante_nombre: 'string nullable', representante_ruc: 'string nullable', periodo_inicio: 'date nullable', periodo_fin: 'date nullable', tipo_cuentas: string, logotipo: 'string nullable', firma_electronica: 'string nullable', firma_electronica_password: 'string nullable', firma_electronica_expiracion: 'date nullable', firma_electronica_actualizacion: 'date nullable', tipo_emision: boolean, ambiente: boolean, facturar_negativo: boolean, moneda_id: id, provincia_id: id, ciudad_id: id, email_facturacion: 'email nullable', leyenda_facturacion: 'string nullable' }
-    Moneda: { nombre: string, valor: 'decimal:14,6 default:0', relationships: { hasOne: Empresa } }
+    Moneda: { nombre: string, valor: 'decimal:14,6 default:0', relationships: { hasMany: Empresa } }
     Ciudad: { codigo: string, nombre: string, provincia_id: id, relationships: { hasMany: Empresa } }
-    Provinica: { codigo: string, nombre: string, relationships: { hasMany: 'Empresa, Ciudad' } }
     Provincia: { codigo: string, nombre: string, relationships: { hasMany: 'Empresa, Ciudad' } }

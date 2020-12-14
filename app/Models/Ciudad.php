@@ -9,7 +9,8 @@ class Ciudad extends Model
 {
     use HasFactory;
 
-    /**
+    public $allowed = ['codigo','nombre','provincia_id','created_at','update_at'];
+/**
      * The attributes that aren't mass assignable.
      *
      * @var array

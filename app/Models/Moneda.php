@@ -9,7 +9,8 @@ class Moneda extends Model
 {
     use HasFactory;
 
-    /**
+    public $allowed = ['nombre','valor','created_at','update_at'];
+/**
      * The attributes that aren't mass assignable.
      *
      * @var array
@@ -27,8 +28,8 @@ class Moneda extends Model
     ];
 
 
-    public function empresa()
+    public function empresas()
     {
-        return $this->hasOne(\App\Models\Empresa::class);
+        return $this->hasMany(\App\Models\Empresa::class);
     }
 }
