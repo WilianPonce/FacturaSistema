@@ -3,17 +3,24 @@ created:
     - database/factories/MonedaFactory.php
     - database/factories/CiudadFactory.php
     - database/factories/ProvinciaFactory.php
+<<<<<<< HEAD
+    - database/migrations/2020_12_14_043346_create_empresas_table.php
+    - database/migrations/2020_12_14_043347_create_monedas_table.php
+    - database/migrations/2020_12_14_043348_create_ciudads_table.php
+    - database/migrations/2020_12_14_043349_create_provincias_table.php
+=======
     - database/migrations/2020_12_14_034417_create_empresas_table.php
     - database/migrations/2020_12_14_034418_create_monedas_table.php
     - database/migrations/2020_12_14_034419_create_ciudads_table.php
     - database/migrations/2020_12_14_034420_create_provincias_table.php
+>>>>>>> d6814ffeea31b3a581a8079bb28cd89b0e48a5c9
     - app/Models/Empresa.php
     - app/Models/Moneda.php
     - app/Models/Ciudad.php
     - app/Models/Provincia.php
 models:
-    Empresa: { periodo: date, razon_social: string, razon_comercial: string, ruc: string, direccion: string, telefono: string, email: 'email unique', email_password: string, email_server: string, email_port: string, email_security: string, obligado_contabilidad: boolean, contador_nombre: string, contador_ruc: string, representante_nombre: string, representante_ruc: string, periodo_inicio: date, periodo_fin: date, tipo_cuentas: string, logotipo: string, firma_electronica: string, firma_electronica_password: string, firma_electronica_expiracion: date, firma_electronica_actualizacion: date, tipo_emision: boolean, ambiente: boolean, facturar_negativo: boolean, moneda_id: id, provincia_id: id, ciudad_id: id, email_facturacion: email, leyenda_facturacion: string }
-    Moneda: { nombre: string, valor: decimal, relationships: { hasMany: Empresa } }
+    Empresa: { periodo: date, razon_social: string, razon_comercial: string, ruc: string, direccion: string, telefono: string, email: 'email unique', email_password: string, email_server: string, email_port: string, email_security: string, obligado_contabilidad: boolean, contador_nombre: 'string nullable', contador_ruc: 'string nullable', representante_nombre: 'string nullable', representante_ruc: 'string nullable', periodo_inicio: 'date nullable', periodo_fin: 'date nullable', tipo_cuentas: string, logotipo: 'string nullable', firma_electronica: 'string nullable', firma_electronica_password: 'string nullable', firma_electronica_expiracion: 'date nullable', firma_electronica_actualizacion: 'date nullable', tipo_emision: boolean, ambiente: boolean, facturar_negativo: boolean, moneda_id: id, provincia_id: id, ciudad_id: id, email_facturacion: 'email nullable', leyenda_facturacion: 'string nullable' }
+    Moneda: { nombre: string, valor: 'decimal:14,6 default:0', relationships: { hasOne: Empresa } }
     Ciudad: { codigo: string, nombre: string, provincia_id: id, relationships: { hasMany: Empresa } }
     Provinica: { codigo: string, nombre: string, relationships: { hasMany: 'Empresa, Ciudad' } }
     Provincia: { codigo: string, nombre: string, relationships: { hasMany: 'Empresa, Ciudad' } }
