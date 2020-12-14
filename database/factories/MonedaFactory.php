@@ -24,7 +24,7 @@ class MonedaFactory extends Factory
     {
         return [
             'nombre' => $this->faker->word,
-            'valor' => $this->faker->randomFloat(0, 0, 99.99),
+            'valor' => $this->faker->randomFloat(0, 0, 999.99),
         ];
     }
 }
