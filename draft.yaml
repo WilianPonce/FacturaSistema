@@ -36,7 +36,7 @@ models:
     nombre: string
     valor: decimal:14,6 default:0
     relationships:
-      hasOne: Empresa
+      hasMany: Empresa
   Ciudad:
     codigo: string
     nombre: string
