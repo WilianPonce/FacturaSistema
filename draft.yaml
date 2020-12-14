@@ -6,14 +6,14 @@ models:
     ruc: string
     direccion: string
     telefono: string
-    email: string unique
+    email: email unique
     email_password: string
     email_server: string
     email_port: string
     email_security: string
     obligado_contabilidad: boolean
-    contador_ruc: string
     contador_nombre: string
+    contador_ruc: string
     representante_nombre: string
     representante_ruc: string
     periodo_inicio: date
@@ -27,23 +27,23 @@ models:
     tipo_emision: boolean
     ambiente: boolean
     facturar_negativo: boolean
-    id_moneda: id
-    id_provincia: id
-    id_ciudad: id
-    email_facturacion: string
+    moneda_id: id
+    provincia_id: id
+    ciudad_id: id
+    email_facturacion: email
     leyenda_facturacion: string
   Moneda:
     nombre: string
-    valor: float
+    valor: decimal
     relationships:
       hasMany: Empresa
   Ciudad:
     codigo: string
     nombre: string
-    id_provincia: id
+    provincia_id: id
     relationships:
       hasMany: Empresa
-  Provinica:
+  Provincia:
     codigo: string
     nombre: string
     relationships:

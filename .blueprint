@@ -1,0 +1,19 @@
+created:
+    - database/factories/EmpresaFactory.php
+    - database/factories/MonedaFactory.php
+    - database/factories/CiudadFactory.php
+    - database/factories/ProvinciaFactory.php
+    - database/migrations/2020_12_13_194753_create_empresas_table.php
+    - database/migrations/2020_12_13_194754_create_monedas_table.php
+    - database/migrations/2020_12_13_194755_create_ciudads_table.php
+    - database/migrations/2020_12_13_194756_create_provincias_table.php
+    - app/Models/Empresa.php
+    - app/Models/Moneda.php
+    - app/Models/Ciudad.php
+    - app/Models/Provincia.php
+models:
+    Empresa: { periodo: date, razon_social: string, razon_comercial: string, ruc: string, direccion: string, telefono: string, email: 'email unique', email_password: string, email_server: string, email_port: string, email_security: string, obligado_contabilidad: boolean, contador_nombre: string, contador_ruc: string, representante_nombre: string, representante_ruc: string, periodo_inicio: date, periodo_fin: date, tipo_cuentas: string, logotipo: string, firma_electronica: string, firma_electronica_password: string, firma_electronica_expiracion: date, firma_electronica_actualizacion: date, tipo_emision: boolean, ambiente: boolean, facturar_negativo: boolean, moneda_id: id, provincia_id: id, ciudad_id: id, email_facturacion: email, leyenda_facturacion: string }
+    Moneda: { nombre: string, valor: decimal, relationships: { hasMany: Empresa } }
+    Ciudad: { codigo: string, nombre: string, provincia_id: id, relationships: { hasMany: Empresa } }
+    Provinica: { codigo: string, nombre: string, relationships: { hasMany: 'Empresa, Ciudad' } }
+    Provincia: { codigo: string, nombre: string, relationships: { hasMany: 'Empresa, Ciudad' } }

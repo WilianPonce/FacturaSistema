@@ -3,14 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\EmpresaController;
 
 //usuario Sesión
-    Route::get("/ver", [UsuariosController::class, "ver"])->name("usuarios.ver")->middleware("permission:users.ver");
-
+    Route::get('/ver', [UsuariosController::class, 'ver'])->name('usuarios.ver')->middleware('permission:users.ver');
+    Route::get('/empresa/{empresa}', [EmpresaController::class, 'show'])->name('empresa.show');
+    Route::get('/empresa', [EmpresaController::class, 'index'])->name('empresa.index');
 //Administrar
     //Empresa
     Route::get("/administrar/empresa/listar", [EmpresaController::class, "listar"])->name("empresa.listar")->middleware("permission:empresa.listar");
-    Route::get("/administrar/empresa/ver", [EmpresaController::class, "ver"])->name("empresa.ver")->middleware("permission:empresa.ver");
+    //Route::get("/administrar/empresa/ver", [EmpresaController::class, "ver"])->name("empresa.ver")->middleware("permission:empresa.ver");
     Route::post("/administrar/empresa/crear", [EmpresaController::class, "crear"])->name("empresa.crear")->middleware("permission:empresa.crear");
     Route::put("/administrar/empresa/editar", [EmpresaController::class, "editar"])->name("empresa.editar")->middleware("permission:empresa.editar");
     Route::delete("/administrar/empresa/eliminar/{id}", [EmpresaController::class, "eliminar"])->name("empresa.eliminar")->middleware("permission:empresa.eliminar");
