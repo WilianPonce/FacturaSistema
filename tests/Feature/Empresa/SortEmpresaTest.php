@@ -11,7 +11,7 @@ class SortEmpresaTest extends TestCase
     /** @test */
     public function it_cant_sort_articles_by_title_asc()
     {
-        $url = route('empresa.index', ['sort' => 'razon_comercial']);
+        $url = route('empresa.listar', ['sort' => 'razon_comercial']);
 
         $this->getJson($url)->assertSeeInOrder([
             'A razon',
@@ -23,7 +23,7 @@ class SortEmpresaTest extends TestCase
     /** @test */
     public function it_cant_sort_articles_by_title_desc()
     {
-        $url = route('empresa.index', ['sort' => '-razon_comercial']);
+        $url = route('empresa.listar', ['sort' => '-razon_comercial']);
 
         $this->getJson($url)->assertSeeInOrder([
             'C razon',
@@ -35,7 +35,7 @@ class SortEmpresaTest extends TestCase
     /** @test */
     public function it_cant_sort_articles_by_title_and_content_desc()
     {
-        $url = route('empresa.index').'?sort=-razon_comercial,razon_social';
+        $url = route('empresa.listar').'?sort=-razon_comercial,razon_social';
 
         $this->getJson($url)->assertSeeInOrder([
             'C razon',
@@ -47,7 +47,7 @@ class SortEmpresaTest extends TestCase
     /** @test */
     public function it_cannot_sort_articles_by_uknow_fields()
     {
-        $url = route('empresa.index').'?sort=unknown';
+        $url = route('empresa.listar').'?sort=unknown';
 
         $this->getJson($url)->assertStatus(400);
     }

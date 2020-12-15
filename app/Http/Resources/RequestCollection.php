@@ -3,11 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use App\Http\Resources\EmpresaResource;
+use App\Http\Resources\RequestResource;
 
-class EmpresaCollection extends ResourceCollection
+class RequestCollection extends ResourceCollection
 {
-    public $collects = EmpresaResource::class;
+    public $collects = RequestResource::class;
     /**
      * Transform the resource collection into an array.
      *

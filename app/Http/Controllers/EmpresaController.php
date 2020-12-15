@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Empresa;
-use App\Http\Resources\EmpresaResource;
-use App\Http\Resources\EmpresaCollection;
+use App\Http\Resources\RequestResource;
+use App\Http\Resources\RequestCollection;
 use Illuminate\support\Str;
 
 class EmpresaController extends Controller
 {
-    function index(){
+    function listar(){
         $empresa = Empresa::applySearchs()->applyFilters()->applySorts()->jsonPaginate(); 
-        return EmpresaCollection::make($empresa);
+        return RequestCollection::make($empresa);
     }
     
-    function show(Empresa $empresa){
-        return EmpresaResource::make($empresa);
+    function ver(Empresa $empresa){
+        return RequestResource::make($empresa);
     }
 }

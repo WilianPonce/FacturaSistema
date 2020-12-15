@@ -11,7 +11,7 @@ class FilterEmpresaTest extends TestCase
     /** @test */
     public function testExample()
     {
-        $url = route('empresa.index', ['filter[direccion]' =>'Quito']);
+        $url = route('empresa.listar', ['filter[direccion]' =>'Quito']);
         $this->getJson($url)
             ->assertJsonCount(1, 'data')
             ->assertSee('Quito')

@@ -13,7 +13,8 @@ class ListEmpresaTest extends TestCase
     /** @test */
     public function can_fetch_single_empresa()
     {   
-        $response = $this->getJson(route('empresa.show', $empresa));
+        $empresa = Empresa::first();
+        $response = $this->getJson(route('empresa.ver', $empresa));
         $response->assertJson([
             'data' => [
                 'type' => 'empresa',
@@ -24,7 +25,7 @@ class ListEmpresaTest extends TestCase
                     'ruc' => $empresa->ruc,
                 ],
                 'links' =>[
-                    'self' => route('empresa.show', $empresa)
+                    'self' => route('empresa.ver', $empresa)
                 ]
             ]
         ]);

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EmpresaResource extends JsonResource
+class RequestResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -26,7 +26,7 @@ class EmpresaResource extends JsonResource
                 'created_at' => $this->resource->created_at
             ],
             'links' =>[
-                'self' => route('empresa.show', $this->resource)
+                'self' => route('empresa.ver', $this->resource)
             ]
         ];
     }
