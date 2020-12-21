@@ -9,8 +9,7 @@ class Moneda extends Model
 {
     use HasFactory;
 
-    public $allowed = ['nombre','valor','created_at','update_at'];
-/**
+    /**
      * The attributes that aren't mass assignable.
      *
      * @var array

@@ -9,8 +9,7 @@ class Provincia extends Model
 {
     use HasFactory;
 
-    public $allowed = ['codigo','nombre','created_at','update_at'];
-/**
+    /**
      * The attributes that aren't mass assignable.
      *
      * @var array

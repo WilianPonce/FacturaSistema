@@ -11,10 +11,10 @@ use Illuminate\support\Str;
 class EmpresaController extends Controller
 {
     function listar(){
-        $empresa = Empresa::applySearchs()->applyFilters()->applySorts()->jsonPaginate(); 
-        return RequestCollection::make($empresa);
+        $empresas = Empresa::paginate(10);
+        return $empresas;
     }
-    
+
     function ver(Empresa $empresa){
         return RequestResource::make($empresa);
     }

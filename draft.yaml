@@ -1,8 +1,8 @@
 models:
   Empresa:
-    periodo: date 
+    periodo: date
     razon_social: string
-    razon_comercial: string 
+    razon_comercial: string
     ruc: string
     direccion: string
     telefono: string
@@ -18,16 +18,16 @@ models:
     representante_ruc: string nullable
     periodo_inicio: date nullable
     periodo_fin: date nullable
-    tipo_cuentas: string 
+    tipo_cuentas: string
     logotipo: string nullable
     firma_electronica: string nullable
     firma_electronica_password: string nullable
     firma_electronica_expiracion: date nullable
     firma_electronica_actualizacion: date nullable
-    tipo_emision: boolean 
-    ambiente: boolean 
-    facturar_negativo: boolean 
-    moneda_id: id 
+    tipo_emision: boolean
+    ambiente: boolean
+    facturar_negativo: boolean
+    moneda_id: id
     provincia_id: id
     ciudad_id: id
     email_facturacion: email nullable

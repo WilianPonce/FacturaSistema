@@ -17,7 +17,7 @@ class UsuariosController extends Controller
         /*SELECT * FROM usuarios WHERE nombre like "%dr%" OR apellido like "%dr%"
             pepe jose chalo macias de ecuador
             %pepe%ecuador%
-        */ //str_replace("valores a cambiar", "valores con los que cambia", $variable) 
+        */ //str_replace("valores a cambiar", "valores con los que cambia", $variable)
 
         $bs = str_replace(array(" ", "-", "_"), "%", $rq->buscar);
         return Usuarios::where("nombre", "like", "%$bs%")
