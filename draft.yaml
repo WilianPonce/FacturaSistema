@@ -1,5 +1,8 @@
+#modelos, database, factories
 models:
+  #tablas unilaterales
   Empresa:
+    codigo: integer
     periodo: date
     razon_social: string
     razon_comercial: string
@@ -32,20 +35,46 @@ models:
     ciudad_id: id
     email_facturacion: email nullable
     leyenda_facturacion: string nullable
-  Moneda:
-    nombre: string
-    valor: decimal:14,6 default:0
     relationships:
-      hasMany: Empresa
+        hasMany: Establecimiento, Punto_emision
+
+  Establecimiento:
+    codigo: integer
+    nombre: string
+    url_web: string
+    nombre_comercial: string
+    direccion: string
+    estado: boolean
+    empresa_id: id
+    relationships:
+        hasMany: Punto_emision
+
+  Punto_emision:
+    codigo: integer
+    nombre: string
+    emision: string
+    factura: string
+    nota_credito: string
+    nota_debito: string
+    guia_remision: string
+    retencion_compra: string
+    liquidacion_compra: string
+    estado: boolean
+    empresa_id: id
+    establecimiento_id: id
+
+
+  #tablas globales
   Ciudad:
     codigo: string
     nombre: string
     provincia_id: id
-    relationships:
-      hasMany: Empresa
   Provincia:
     codigo: string
     nombre: string
     relationships:
-      hasMany: Empresa, Ciudad
+      hasMany: Ciudad
+  Moneda:
+    nombre: string
+    valor: decimal:14,6 default:0
 

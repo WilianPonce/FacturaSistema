@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Moneda extends Model
+class Establecimiento extends Model
 {
     use HasFactory;
 
@@ -23,6 +23,18 @@ class Moneda extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'valor' => 'decimal:6',
+        'estado' => 'boolean',
+        'empresa_id' => 'integer',
     ];
+
+
+    public function puntoEmisions()
+    {
+        return $this->hasMany(\App\Models\PuntoEmision::class);
+    }
+
+    public function empresa()
+    {
+        return $this->belongsTo(\App\Models\Empresa::class);
+    }
 }

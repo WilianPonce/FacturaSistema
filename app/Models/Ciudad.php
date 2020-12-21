@@ -27,11 +27,6 @@ class Ciudad extends Model
     ];
 
 
-    public function empresas()
-    {
-        return $this->hasMany(\App\Models\Empresa::class);
-    }
-
     public function provincia()
     {
         return $this->belongsTo(\App\Models\Provincia::class);

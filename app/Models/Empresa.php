@@ -38,6 +38,16 @@ class Empresa extends Model
     ];
 
 
+    public function establecimientos()
+    {
+        return $this->hasMany(\App\Models\Establecimiento::class);
+    }
+
+    public function puntoEmisions()
+    {
+        return $this->hasMany(\App\Models\PuntoEmision::class);
+    }
+
     public function moneda()
     {
         return $this->belongsTo(\App\Models\Moneda::class);

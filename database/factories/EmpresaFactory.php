@@ -26,6 +26,7 @@ class EmpresaFactory extends Factory
     public function definition()
     {
         return [
+            'codigo' => $this->faker->numberBetween(-10000, 10000),
             'periodo' => $this->faker->date(),
             'razon_social' => $this->faker->word,
             'razon_comercial' => $this->faker->word,

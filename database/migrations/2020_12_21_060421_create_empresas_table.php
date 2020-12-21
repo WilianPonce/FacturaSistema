@@ -17,6 +17,7 @@ class CreateEmpresasTable extends Migration
 
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
+            $table->integer('codigo');
             $table->date('periodo');
             $table->string('razon_social');
             $table->string('razon_comercial');
