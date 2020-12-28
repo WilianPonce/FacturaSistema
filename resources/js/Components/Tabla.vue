@@ -6,7 +6,7 @@
                     <template v-if="datos.opciones.buscar">
                         <div class="relative md:w-1/3">
                             <input type="text" class="w-full pl-10 pr-4 py-2 focus:outline-none focus:rounded-2xl focus:shadow-outline text-gray-600 font-medium inprel" placeholder="Buscar..." v-model="valores.buscar" v-on:keyup="listarbusqueda">
-                            <span v-if="valores.buscar" v-on:click="valores.buscar='',listarbusqueda()"  class="closesearch">
+                            <span v-if="valores.buscar" v-on:click="valores.buscar='',listarbusquedax()"  class="closesearch">
                                 <i style="z-index:9999" class="fas fa-times text-gray-600"></i>
                             </span>
                             <div class="absolute top-0 left-0 inline-flex items-center p-2">
@@ -29,7 +29,7 @@
                     <template v-if="datos.opciones.crear">
                         <div v-if="datos.permisos.crear">
                             <div class="relative shadow rounded-lg">
-                                <button @click="$emit('crear', 'crear')" class="rounded-lg inline-flex items-center hover:text-grey-500 focus:outline-none focus:shadow-outline text-white font-semibold py-2 px-2 md:px-4 bg-blue-900">
+                                <button @click="$emit('crear', 'crear')" class="hover:bg-blue-800 rounded-lg inline-flex items-center hover:text-grey-500 focus:outline-none focus:shadow-outline text-white font-semibold py-2 px-2 md:px-4 bg-blue-900">
                                     Agregar
                                 </button>
                             </div>
@@ -61,18 +61,18 @@
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500 opciones text-center">
                                     <template v-if="datos.opciones.ver">
                                         <button @click="$emit('ver', 'ver', tr)" class="focus:outline-none espaciador" v-if="datos.permisos.ver">
-                                            <i class="fa fa-eye"></i>
+                                            <i class="fa fa-eye hover:opacity-75"></i>
                                         </button>
                                     </template>
                                     <template v-if="datos.opciones.editar">
                                         <button @click="$emit('editar', 'editar', tr)" class="focus:outline-none espaciador" v-if="datos.permisos.editar">
-                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-edit hover:opacity-75"></i>
                                         </button>
                                     </template>
                                     <slot name="opciones" :data="tr"></slot>
                                     <template v-if="datos.opciones.eliminar">
                                         <button @click="$emit('eliminar', 'eliminar', tr)" class="focus:outline-none" v-if="datos.permisos.eliminar">
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fa fa-trash hover:opacity-75"></i>
                                         </button>
                                     </template>
                                 </td>
@@ -117,7 +117,7 @@
         methods: {
             async listar($state){
                 try {
-                    const { data } = await axios.get(this.datos.ruta + "?page=" + this.preloader.pagina + "&buscar=" + this.valores.buscar);
+                    const { data } = await axios.get(route(this.datos.ruta) + "?page=" + this.preloader.pagina + "&buscar=" + this.valores.buscar);
                     let datos = data.data;
                     if(datos.length){
                         this.preloader.pagina++;
@@ -141,6 +141,11 @@
                     this.datos.array.listar = [];
                     this.preloader.recargar++;
                 }, 500);
+            },
+            listarbusquedax(){
+                this.preloader.pagina = 1;
+                this.datos.array.listar = [];
+                this.preloader.recargar++;
             }
         },
     }

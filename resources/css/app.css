@@ -1,3 +1,43 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.estiloselect input{
+    background: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0!important;
+}
+
+.divider{
+    width: 100%;
+    position: relative;
+    display: block;
+    clear: both;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 40px 0px 15px 0px;
+    font-size: 12px;
+    font-family: unset;
+    color: #a0a0a0;
+}
+
+.divider::before{
+    content:"";
+    width: 100%;
+    border: 0.5px solid #d2d6dc;
+}
+.divider span{
+    position: absolute;
+    background: #fff;
+    padding: 10px;
+}
+.vs-select-content{
+    max-width: 100%!important;
+}

@@ -75,7 +75,7 @@
         data() {
             return {
                 datos:{
-                    ruta: "/usuarios/listar",
+                    ruta: "usuarios.listar",
                     opciones:{
                         buscar:true,
                         opciones:true,

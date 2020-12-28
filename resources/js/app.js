@@ -12,7 +12,14 @@ import 'vuesax/dist/vuesax.css';
 import InfiniteLoading from 'vue-infinite-loading';
 import LaravelPermissionToVueJS from 'laravel-permission-to-vuejs';
 import AppLayout from './Layouts/AppLayout';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import VueAlertify from 'vue-alertify';
 
+import 'vuesax/dist/vuesax.css';
+
+Vue.use(VueAlertify);
+Vue.use(VueSweetalert2);
 Vue.component("AppLayout", AppLayout);
 Vue.use(LaravelPermissionToVueJS);
 Vue.use(Vuesax);

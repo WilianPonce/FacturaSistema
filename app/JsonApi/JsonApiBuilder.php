@@ -28,20 +28,20 @@ class JsonApiBuilder
             if(is_null($sort = request("sort"))){
                 return $this;
             }
-    
+
             $sorts = Str::of($sort)->explode(',');
-            
+
             foreach ($sorts as $sort) {
                 $direction = 'asc';
                 if(Str::of($sort)->startsWith('-')) {
                     $direction = 'desc';
                     $sort = Str::of($sort)->substr(1);
                 }
-    
+
                 if(! collect($this->model->allowed)->contains($sort)){
                     abort(400, "El Parámetro {$sort} no fue encontrado.");
                 }
-    
+
                 $this->orderBy($sort, $direction);
             }
             return $this;

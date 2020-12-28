@@ -30,7 +30,9 @@
     "dependencies": {
         "jquery": "^3.5.1",
         "laravel-permission-to-vuejs": "^2.0.5",
+        "vue-alertify": "^1.1.0",
         "vue-infinite-loading": "^2.4.5",
+        "vue-sweetalert2": "^4.1.1",
         "vuesax": "^4.0.1-alpha.25"
     }
 }

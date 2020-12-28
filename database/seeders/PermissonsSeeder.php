@@ -15,14 +15,14 @@ class PermissonsSeeder extends Seeder
      * @return void
      */
     public function run()
-    {    
+    {
         //Administración
             //Empresa
-            Permission::create(["name"=>"empresa.listar"]);
-            Permission::create(["name"=>"empresa.ver"]);
-            Permission::create(["name"=>"empresa.crear"]);
-            Permission::create(["name"=>"empresa.editar"]);
-            Permission::create(["name"=>"empresa.eliminar"]);
+            Permission::create(["name"=>"empresas.listar"]);
+            Permission::create(["name"=>"empresas.ver"]);
+            Permission::create(["name"=>"empresas.crear"]);
+            Permission::create(["name"=>"empresas.editar"]);
+            Permission::create(["name"=>"empresas.eliminar"]);
 
             //Establecimientos
             Permission::create(["name"=>"establecimientos.listar"]);
@@ -44,14 +44,14 @@ class PermissonsSeeder extends Seeder
             Permission::create(["name"=>"usuarios.crear"]);
             Permission::create(["name"=>"usuarios.editar"]);
             Permission::create(["name"=>"usuarios.eliminar"]);
-            
+
             //Impuestos
             Permission::create(["name"=>"impuestos.listar"]);
             Permission::create(["name"=>"impuestos.ver"]);
             Permission::create(["name"=>"impuestos.crear"]);
             Permission::create(["name"=>"impuestos.editar"]);
             Permission::create(["name"=>"impuestos.eliminar"]);
-        
+
         foreach(range(1, 25) as $cont){
             Role::first()->givePermissionTo(intval($cont));
         }

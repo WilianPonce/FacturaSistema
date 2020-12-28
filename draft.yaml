@@ -6,7 +6,8 @@ models:
     periodo: date
     razon_social: string
     razon_comercial: string
-    ruc: string
+    tipo_identificacion: integer
+    identificacion: string
     direccion: string
     telefono: string
     email: email unique

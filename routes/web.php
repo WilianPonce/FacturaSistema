@@ -15,46 +15,46 @@ use App\Http\Controllers\UsuariosController;
 
 //administrar
     //Empresa
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/listar', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Listar');
-    })->name('administrar.empresa.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/ver', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Ver');
-    })->name('administrar.empresa.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/crear', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Crear');
-    })->name('administrar.empresa.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/editar', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Editar');
-    })->name('administrar.empresa.editar');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/listar', function () {
+        return Inertia\Inertia::render('Administrar/Empresas/Listar');
+    })->name('administrar.empresas.listar');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/{id}/ver', function () {
+        return Inertia\Inertia::render('Administrar/Empresas/Ver');
+    })->name('administrar.empresas.ver');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/crear', function () {
+        return Inertia\Inertia::render('Administrar/Empresas/Crear');
+    })->name('administrar.empresas.crear');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/{id}/editar', function () {
+        return Inertia\Inertia::render('Administrar/Empresas/Editar');
+    })->name('administrar.empresas.editar');
 
     //Establecimeintos
     Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/listar', function () {
         return Inertia\Inertia::render('Administrar/Establecimientos/Listar');
     })->name('administrar.establecimientos.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/ver', function () {
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/{id}/ver', function () {
         return Inertia\Inertia::render('Administrar/Establecimientos/Ver');
     })->name('administrar.establecimientos.ver');
     Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/crear', function () {
         return Inertia\Inertia::render('Administrar/Establecimientos/Crear');
     })->name('administrar.establecimientos.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/editar', function () {
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/{id}/editar', function () {
         return Inertia\Inertia::render('Administrar/Establecimientos/Editar');
     })->name('administrar.establecimientos.editar');
 
     //Puntos Emision
     Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/listar', function () {
         return Inertia\Inertia::render('Administrar/Puntos_Emision/Listar');
-    })->name('administrar.puntos-emision.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/ver', function () {
+    })->name('administrar.puntos_emision.listar');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/{id}/ver', function () {
         return Inertia\Inertia::render('Administrar/Puntos_Emision/Ver');
-    })->name('administrar.puntos-emision.ver');
+    })->name('administrar.puntos_emision.ver');
     Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/crear', function () {
         return Inertia\Inertia::render('Administrar/Puntos_Emision/Crear');
-    })->name('administrar.puntos-emision.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/editar', function () {
+    })->name('administrar.puntos_emision.crear');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/{id}/editar', function () {
         return Inertia\Inertia::render('Administrar/Puntos_Emision/Editar');
-    })->name('administrar.puntos-emision.editar');
+    })->name('administrar.puntos_emision.editar');
 
     //Usuarios
     Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/listar', function () {
