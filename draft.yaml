@@ -2,8 +2,8 @@
 models:
   #tablas unilaterales
   Empresa:
-    codigo: integer
-    periodo: date
+    codigo: integer nullable
+    periodo: integer
     razon_social: string
     razon_comercial: string
     tipo_identificacion: integer
@@ -22,7 +22,6 @@ models:
     representante_ruc: string nullable
     periodo_inicio: date nullable
     periodo_fin: date nullable
-    tipo_cuentas: string
     logotipo: string nullable
     firma_electronica: string nullable
     firma_electronica_password: string nullable
@@ -40,26 +39,27 @@ models:
         hasMany: Establecimiento, Punto_emision
 
   Establecimiento:
-    codigo: integer
+    codigo: integer nullable
     nombre: string
-    url_web: string
-    nombre_comercial: string
+    serie: string
+    url_web: string nullable
+    nombre_comercial: string nullable
     direccion: string
     estado: boolean
     empresa_id: id
     relationships:
         hasMany: Punto_emision
 
-  Punto_emision:
-    codigo: integer
+  PuntoEmision:
+    codigo: integer nullable
     nombre: string
-    emision: string
-    factura: string
-    nota_credito: string
-    nota_debito: string
-    guia_remision: string
-    retencion_compra: string
-    liquidacion_compra: string
+    serie: string
+    factura: string nullable
+    nota_credito: string nullable
+    nota_debito: string nullable
+    guia_remision: string nullable
+    retencion_compra: string nullable
+    liquidacion_compra: string nullable
     estado: boolean
     empresa_id: id
     establecimiento_id: id
@@ -67,11 +67,11 @@ models:
 
   #tablas globales
   Ciudad:
-    codigo: string
+    codigo: string nullable
     nombre: string
     provincia_id: id
   Provincia:
-    codigo: string
+    codigo: string nullable
     nombre: string
     relationships:
       hasMany: Ciudad

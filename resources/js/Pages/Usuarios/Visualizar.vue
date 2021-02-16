@@ -1,8 +1,7 @@
-<template>
+<!--<template>
     <app-layout>
         <tabla-general :datos="datos" @eliminar="eliminar" @editar="abrir_modal" @ver="abrir_modal" @crear="abrir_modal">
             <template #opciones_adicionales>
-                <!--top|bot|modal-top|modal-bot|modal-->
                 <opciones @click="abrir_modal" as="modal-top">abrir</opciones>
                 <opciones :href="route('usuarios.visualizar')">Generar</opciones>
                 <opciones :href="route('usuarios.visualizar')" as="bot">enviar</opciones>
@@ -62,7 +61,7 @@
 </template>
 
 <script>
-    import TablaGeneral from '@/Components/Tabla';
+    import TablaGeneral from '@/Components/Compuestos/Tabla';
     import Opciones from '@/Components/Opciones';
     import ModalGeneral from '@/Jetstream/DialogModal';
 

@@ -26,6 +26,7 @@ class EstablecimientoFactory extends Factory
         return [
             'codigo' => $this->faker->numberBetween(-10000, 10000),
             'nombre' => $this->faker->word,
+            'serie' => $this->faker->word,
             'url_web' => $this->faker->word,
             'nombre_comercial' => $this->faker->word,
             'direccion' => $this->faker->word,

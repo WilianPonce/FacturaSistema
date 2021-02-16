@@ -42,7 +42,7 @@
                     <thead>
                         <tr>
                             <template v-for="(tit,index) in datos.tabla.titulo">
-                                    <th v-bind:key="index" class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{tit}}</th>
+                                    <th v-bind:key="index" class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider" :class="{'estado text-center':tit=='ESTADO'}">{{tit}}</th>
                             </template>
                             <template v-if="datos.opciones.opciones">
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider opciones">
@@ -54,7 +54,13 @@
                         <tr v-for="(tr, $index) in datos.array.listar" :key="$index">
                             <template v-for="(tit,index1) in datos.tabla.campos">
                                 <td v-bind:key="index1" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-gray-500">
-                                    {{ tr | imprimir(tit) }}
+                                    <span v-if="tit=='estado'" class="w-full text-center" style="display:block">
+                                        <span v-if="tr.estado" class="w-full text-center text-green-500 text-white" style="font-weight: bold;display:block">Activo</span>
+                                        <span v-else class="w-full text-center text-red-500 text-white" style="font-weight: bold;display:block">Inactivo</span>
+                                    </span>
+                                    <span v-else>
+                                        {{ tr | imprimir(tit) }}
+                                    </span>
                                 </td>
                             </template>
                             <template v-if="datos.opciones.opciones">
@@ -199,5 +205,8 @@
         -ms-transition: all .3s ease;
         -o-transition: all .3s ease;
         transition: all .3s ease;
+    }
+    .estado {
+        width: 100px;
     }
 </style>

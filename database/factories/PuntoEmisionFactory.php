@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Empresa;
 use App\Models\Establecimiento;
-use App\Models\Punto_emision;
+use App\Models\PuntoEmision;
 
 class PuntoEmisionFactory extends Factory
 {
@@ -27,7 +27,7 @@ class PuntoEmisionFactory extends Factory
         return [
             'codigo' => $this->faker->numberBetween(-10000, 10000),
             'nombre' => $this->faker->word,
-            'emision' => $this->faker->word,
+            'serie' => $this->faker->word,
             'factura' => $this->faker->word,
             'nota_credito' => $this->faker->word,
             'nota_debito' => $this->faker->word,

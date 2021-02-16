@@ -27,7 +27,7 @@ class EmpresaFactory extends Factory
     {
         return [
             'codigo' => $this->faker->numberBetween(-10000, 10000),
-            'periodo' => $this->faker->date(),
+            'periodo' => $this->faker->numberBetween(-10000, 10000),
             'razon_social' => $this->faker->word,
             'razon_comercial' => $this->faker->word,
             'tipo_identificacion' => $this->faker->numberBetween(-10000, 10000),
@@ -46,7 +46,6 @@ class EmpresaFactory extends Factory
             'representante_ruc' => $this->faker->word,
             'periodo_inicio' => $this->faker->date(),
             'periodo_fin' => $this->faker->date(),
-            'tipo_cuentas' => $this->faker->word,
             'logotipo' => $this->faker->word,
             'firma_electronica' => $this->faker->word,
             'firma_electronica_password' => $this->faker->word,

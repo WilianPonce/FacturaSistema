@@ -19,6 +19,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('telefono')->nullable();
+            $table->string('celular')->nullable();
+            $table->string('tipo_sangre')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('nombre_familiar')->nullable();
+            $table->string('contacto_familiar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -27,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('establecimiento_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('punto_emision_id')->nullable()->constrained()->cascadeOnDelete();
             $table->text('profile_photo_path')->nullable();
+            $table->boolean('estado');
             $table->timestamps();
         });
 

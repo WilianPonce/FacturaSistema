@@ -1,7 +1,10 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosController;
+use App\Models\Empresa;
+use App\Models\Establecimiento;
+use App\Models\PuntoEmision;
 
 //página principal
     Route::get('/', function () {
@@ -15,62 +18,72 @@ use App\Http\Controllers\UsuariosController;
 
 //administrar
     //Empresa
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/listar', function () {
-        return Inertia\Inertia::render('Administrar/Empresas/Listar');
-    })->name('administrar.empresas.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/{id}/ver', function () {
-        return Inertia\Inertia::render('Administrar/Empresas/Ver');
-    })->name('administrar.empresas.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/crear', function () {
-        return Inertia\Inertia::render('Administrar/Empresas/Crear');
-    })->name('administrar.empresas.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresas/{id}/editar', function () {
-        return Inertia\Inertia::render('Administrar/Empresas/Editar');
-    })->name('administrar.empresas.editar');
+    Route::prefix('/administrar/empresas/')->group(function () {
+        Route::middleware(['auth:sanctum', 'verified'])->get('listar', function () {
+            return Inertia\Inertia::render('src/Administrar/Empresas/Listar');
+        })->name('administrar.empresas.listar');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/ver', function ($id) {
+            return Inertia\Inertia::render('src/Administrar/Empresas/Ver');
+        })->name('administrar.empresas.ver');
+        Route::middleware(['auth:sanctum', 'verified'])->get('crear', function () {
+            return Inertia\Inertia::render('src/Administrar/Empresas/Crear');
+        })->name('administrar.empresas.crear');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/editar', function ($id) {
+            $recupera = Empresa::find($id);
+            return Inertia\Inertia::render('src/Administrar/Empresas/Editar', ['recupera' => $recupera]);
+        })->name('administrar.empresas.editar');
+    });
 
     //Establecimeintos
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/listar', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Listar');
-    })->name('administrar.establecimientos.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/{id}/ver', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Ver');
-    })->name('administrar.establecimientos.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/crear', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Crear');
-    })->name('administrar.establecimientos.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/{id}/editar', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Editar');
-    })->name('administrar.establecimientos.editar');
+    Route::prefix('/administrar/establecimientos/')->group(function () {
+        Route::middleware(['auth:sanctum', 'verified'])->get('listar', function () {
+            return Inertia\Inertia::render('src/Administrar/Establecimientos/Listar');
+        })->name('administrar.establecimientos.listar');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/ver', function ($id) {
+            $response = Establecimiento::where("empresa_id", "=", Auth::User()->empresa_id)->where("id", "=", $id)->first();
+            return Inertia\Inertia::render('src/Administrar/Establecimientos/Ver', ['form' => $response]);
+        })->name('administrar.establecimientos.ver');
+        Route::middleware(['auth:sanctum', 'verified'])->get('crear', function () {
+            return Inertia\Inertia::render('src/Administrar/Establecimientos/Crear');
+        })->name('administrar.establecimientos.crear');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/editar', function ($id) {
+            $response = Establecimiento::where("empresa_id", "=", Auth::User()->empresa_id)->where("id", "=", $id)->first();
+            return Inertia\Inertia::render('src/Administrar/Establecimientos/Editar', ['response' => $response]);
+        })->name('administrar.establecimientos.editar');
+    });
 
     //Puntos Emision
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/listar', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Listar');
-    })->name('administrar.puntos_emision.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/{id}/ver', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Ver');
-    })->name('administrar.puntos_emision.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/crear', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Crear');
-    })->name('administrar.puntos_emision.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/{id}/editar', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Editar');
-    })->name('administrar.puntos_emision.editar');
+    Route::prefix('/administrar/puntos-emision/')->group(function () {
+        Route::middleware(['auth:sanctum', 'verified'])->get('listar', function () {
+            return Inertia\Inertia::render('src/Administrar/Puntos_Emision/Listar');
+        })->name('administrar.puntos_emision.listar');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/ver', function ($id) {
+            return Inertia\Inertia::render('src/Administrar/Puntos_Emision/Ver');
+        })->name('administrar.puntos_emision.ver');
+        Route::middleware(['auth:sanctum', 'verified'])->get('crear', function () {
+            return Inertia\Inertia::render('src/Administrar/Puntos_Emision/Crear');
+        })->name('administrar.puntos_emision.crear');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/editar', function ($id) {
+            $response = PuntoEmision::where("empresa_id", "=", Auth::User()->empresa_id)->where("id", "=", $id)->first();
+            return Inertia\Inertia::render('src/Administrar/Puntos_Emision/Editar', ['response' => $response]);
+        })->name('administrar.puntos_emision.editar');
+    });
 
     //Usuarios
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/listar', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Listar');
-    })->name('administrar.usuarios.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/{id}/ver', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Ver');
-    })->name('administrar.usuarios.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/crear', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Crear');
-    })->name('administrar.usuarios.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/{id}/editar', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Editar');
-    })->name('administrar.usuarios.editar');
-
-
+    Route::prefix('/administrar/usuarios/')->group(function () {
+        Route::middleware(['auth:sanctum', 'verified'])->get('listar', function () {
+            return Inertia\Inertia::render('src/Administrar/Usuarios/Listar');
+        })->name('administrar.usuarios.listar');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/ver', function ($id) {
+            return Inertia\Inertia::render('src/Administrar/Usuarios/Ver');
+        })->name('administrar.usuarios.ver');
+        Route::middleware(['auth:sanctum', 'verified'])->get('crear', function () {
+            return Inertia\Inertia::render('src/Administrar/Usuarios/Crear');
+        })->name('administrar.usuarios.crear');
+        Route::middleware(['auth:sanctum', 'verified'])->get('{id}/editar', function ($id) {
+            return Inertia\Inertia::render('src/Administrar/Usuarios/Editar');
+        })->name('administrar.usuarios.editar');
+    });
 
 
 

@@ -19,26 +19,46 @@ class UserSeeder extends Seeder
             'name' => 'Wilian Ponce',
             'email' => "wily2809@hotmail.com",
             'password' => Hash::make('12345678'),
+            'empresa_id' => 1,
+            'punto_emision_id' => 1,
+            'establecimiento_id' => 1,
+            'estado' => true
         ]);
         User::insert([
             'name' => 'David Cruz',
             'email' => "davidcruz@demo.com",
             'password' => Hash::make('12345678'),
+            'empresa_id' => 1,
+            'punto_emision_id' => 1,
+            'establecimiento_id' => 1,
+            'estado' => true
         ]);
         User::insert([
             'name' => 'Leonardo Sanchez Cruz',
             'email' => "leosanchez@demo.com",
             'password' => Hash::make('12345678'),
+            'empresa_id' => 1,
+            'punto_emision_id' => 1,
+            'establecimiento_id' => 1,
+            'estado' => true
         ]);
         User::insert([
             'name' => 'Administrador',
             'email' => "administrador@demo.com",
             'password' => Hash::make('12345678'),
+            'empresa_id' => 1,
+            'punto_emision_id' => 1,
+            'establecimiento_id' => 1,
+            'estado' => true
         ]);
         User::insert([
             'name' => 'Usuario',
             'email' => "usuario@demo.com",
             'password' => Hash::make('12345678'),
+            'empresa_id' => 1,
+            'punto_emision_id' => 1,
+            'establecimiento_id' => 1,
+            'estado' => true
         ]);
         User::factory()->times(5)->create();
 

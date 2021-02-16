@@ -23,7 +23,6 @@ class Empresa extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'periodo' => 'date',
         'obligado_contabilidad' => 'boolean',
         'periodo_inicio' => 'date',
         'periodo_fin' => 'date',
