@@ -1,22 +1,25 @@
 <template>
     <div class="custom-select" :tabindex="tabindex">
-        <div @click="borrar()" :disabled="disabled" class="pointer">
+        <div @click="borrar()" :disabled="disabled" v-if="!disabled" class="pointer">
             <i class="fas fa-times selecticon1" v-if="selected"></i>
         </div>
         <div class="selected" :class="{ open: open }" @click="open = true">
-            <i class="fas fa-chevron-up selecticon"></i>
-            <input type="text" class="input" v-model="selected" :placeholder="placeholder" :disabled="disabled" @keyup="listar(selected);open=true">
+            <i class="fas fa-chevron-up selecticon" v-if="!disabled"></i>
+            <input type="text" class="input" v-model="selected" :placeholder="placeholder" v-if="!disabled" @keyup="listar(selected);open=true">
+            <input type="text" class="input" v-model="selected" :placeholder="placeholder" disabled v-else>
         </div>
-        <div class="items" :class="{ selectHide: !open }" v-if="options.length">
-            <div v-for="(option, i) of options" :key="i"  @click=" selected = option.nombre; open = false; $emit('input', option.id)">
-                {{ option.nombre }}
+        <template v-if="!disabled">
+            <div class="items" :class="{ selectHide: !open }" v-if="options.length">
+                <div v-for="(option, i) of options" :key="i"  @click=" selected = option.nombre; open = false; $emit('input', option.id)">
+                    {{ option.nombre }}
+                </div>
             </div>
-        </div>
-        <div class="items" :class="{ selectHide: !open }" v-else>
-            <div>
-                Sin valores
+            <div class="items" :class="{ selectHide: !open }" v-else>
+                <div>
+                    Sin valores
+                </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 

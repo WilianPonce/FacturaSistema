@@ -1,22 +1,24 @@
 <template>
     <div class="custom-select" :tabindex="tabindex">
-        <div @click="borrar()" :disabled="disabled" class="pointer">
+        <div @click="borrar()" :disabled="disabled" v-if="!disabled" class="pointer">
             <i class="fas fa-times selecticon1" v-if="selected"></i>
         </div>
         <div class="selected" :class="{ open: open }" @click="open = true">
-            <i class="fas fa-chevron-up selecticon"></i>
+            <i class="fas fa-chevron-up selecticon" v-if="!disabled"></i>
             <input type="text" class="input" v-model="selected" :placeholder="placeholder" :disabled="disabled" @keyup="open=true">
         </div>
-        <div class="items" :class="{ selectHide: !open }" v-if="options.length">
-            <div v-for="(option, i) of options" :key="i"  @click=" selected = option; open = false; $emit('input', option)">
-                {{ option }}
+        <template v-if="!disabled">
+            <div class="items" :class="{ selectHide: !open }" v-if="options.length">
+                <div v-for="(option, i) of options" :key="i"  @click=" selected = option; open = false; $emit('input', option)">
+                    {{ option }}
+                </div>
             </div>
-        </div>
-        <div class="items" :class="{ selectHide: !open }" v-else>
-            <div>
-                Sin valores
+            <div class="items" :class="{ selectHide: !open }" v-else>
+                <div>
+                    Sin valores
+                </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 
@@ -55,12 +57,22 @@
                 options: [],
                 selected: "",
                 open: false,
+                valor: this.value,
             };
         },
         computed: {
             periodos(){
                 for(var i=2021; i>=2000; i--){
                     this.options.push(i);
+                }
+                if(this.valor){
+                    this.options.forEach(el => {
+                        if(el == this.valor){
+                            this.selected = el;
+                            this.$emit("input", el);
+                            return;
+                        }
+                    });
                 }
             }
         },
@@ -75,24 +87,9 @@
                 this.selected = "";
                 this.$emit('input', null);
                 this.open=true;
-            },
-            recuperar(){
-                let valor = this.value;
-                setTimeout(() => {
-                    if(valor){
-                        this.options.forEach(el => {
-                            if(el == valor){
-                                this.selected = el;
-                                this.$emit("input", el);
-                                return;
-                            }
-                        });
-                    }
-                }, 1000);
             }
         },
         mounted() {
-            this.recuperar();
             let me = this;
             $(document).on("click",function(e) {
                 me.salida(e);

@@ -2,7 +2,7 @@
     <div>
         <div :class="'grid grid-cols-'+data.length+' mt-1'" v-show="!preloader">
             <label :name="name" class="align inline-flex items-center mt-3 cursor-pointer" v-for="(tr, index) in data" :key="index">
-                <input :name="name" type="radio" :value="tr.id" class="cursor-pointer form-radio h-5 w-5 text-gray-600" v-model="valor" @click="$emit('input', tr.id)">
+                <input :name="name" type="radio" :disabled="disabled" :value="tr.id" class="cursor-pointer form-radio h-5 w-5 text-gray-600" v-model="valor" @click="$emit('input', tr.id)">
                 <span class="ml-2 text-gray-700">{{ tr.nombre }}</span>
             </label>
         </div>
@@ -29,7 +29,12 @@ export default {
             type:String,
             require:false,
             default:'default'
-        }
+        },
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     data() {
         return {

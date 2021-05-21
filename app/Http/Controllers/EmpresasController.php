@@ -5,13 +5,46 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Empresa;
 use Illuminate\Support\Facades\Auth;
-
+use Inertia\Inertia;
 class EmpresasController extends Controller
 {
+    //vistas de empresas
+    function listar_render(){
+        return Inertia::render('src/Administrar/Empresas/Listar');
+    }
+    function ver_render($id){
+        $response = Empresa::find($id);
+        if(empty($response)){
+            return abort(404);
+        }
+        $response->offsetSet('email_password_confirmation', $response->email_password);
+        return Inertia::render('src/Administrar/Empresas/Ver', ['response' => $response]);
+    }
+    function crear_render(){
+        return Inertia::render('src/Administrar/Empresas/Crear');
+    }
+    function editar_render($id){
+        $response = Empresa::find($id);
+        if(empty($response)){
+            return abort(404);
+        }
+        $response->offsetSet('_method', "PUT");
+        $response->offsetSet('email_password_confirmation', $response->email_password);
+        $response->offsetSet('logotipo_archivo', null);
+        $response->offsetSet('firma_electronica_archivo', null);
+
+        return Inertia::render('src/Administrar/Empresas/Editar', ['response' => $response]);
+    }
+
+    //peticiones de establecimientos
     function validar($rq){
         $email_facturacion = '';
+        $unico = '';
         if(isset($rq->email_facturacion)){
             $email_facturacion = ['email'];
+        }
+        if(!isset($rq->id)){
+            $unico = 'unique:empresas';
         }
         $rules = [
             'periodo' => 'required|numeric',
@@ -21,7 +54,7 @@ class EmpresasController extends Controller
             'identificacion' => 'required|numeric',
             'direccion' => 'required',
             'telefono' => 'required|numeric',
-            'email' => 'required|email|unique:empresas',
+            'email' => 'required|email|'.$unico,
             'email_password' => 'required|confirmed',
             'email_server' => 'required',
             'email_port' => 'required|numeric',
@@ -77,6 +110,7 @@ class EmpresasController extends Controller
         //logotipo
         $logotipo = $this->guardar_logotipo($rq);
         if($logotipo){$rq->offsetSet('logotipo', $logotipo);}
+
         //firma
         $firma = $this->guardar_firma($rq);
         if($firma){$rq->offsetSet('firma_electronica', $firma);}

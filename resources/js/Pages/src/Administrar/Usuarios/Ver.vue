@@ -1,6 +1,6 @@
 <template>
     <app-layout v-model="user">
-        
+
     </app-layout>
 </template>
 
@@ -8,7 +8,7 @@
     import AppLayout from '@/Layouts/AppLayout';
     import Welcome from '@/Jetstream/Welcome';
     import ModalJet from '@/Jetstream/DialogModal';
-        
+
     export default {
         props:{
             user: Object

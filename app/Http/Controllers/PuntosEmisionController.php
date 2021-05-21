@@ -6,9 +6,34 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PuntoEmision;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class PuntosEmisionController extends Controller
 {
+    //vistas de establecimientos
+    function listar_render(){
+        return Inertia::render('src/Administrar/Puntos_Emision/Listar');
+    }
+    function ver_render($id){
+        $response = PuntoEmision::where("empresa_id", "=", Auth::User()->empresa_id)->where("id", "=", $id)->first();
+        if(empty($response)){
+            return abort(404);
+        }
+        return Inertia::render('src/Administrar/Puntos_Emision/Ver', ['response' => $response]);
+    }
+    function crear_render(){
+        return Inertia::render('src/Administrar/Puntos_Emision/Crear');
+    }
+    function editar_render($id){
+        $response = PuntoEmision::where("empresa_id", "=", Auth::User()->empresa_id)->where("id", "=", $id)->first();
+        if(empty($response)){
+            return abort(404);
+        }
+        $response->offsetSet('_method', "PUT");
+        return Inertia::render('src/Administrar/Puntos_Emision/Editar', ['response' => $response]);
+    }
+
+    //peticiones de establecimientos
     function listar(Request $rq){
         $buscar = str_replace(array(" ", "-", "_"), "%", $rq->buscar);
         $puntoEmision = PuntoEmision::select('*')
@@ -31,7 +56,7 @@ class PuntosEmisionController extends Controller
     function editar($id, Request $rq){
         $this->validar($rq);
         PuntoEmision::find($id)->update($rq->all());
-        return redirect()->back()->with('message', "Punto de Emisión creado exitosamente");
+        return redirect()->back()->with('message', "Punto de Emisión actualizado exitosamente");
     }
     function eliminar($id){
         PuntoEmision::find($id)->delete();

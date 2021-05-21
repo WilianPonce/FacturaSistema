@@ -1,22 +1,24 @@
 <template>
     <div class="custom-select" :tabindex="tabindex">
-        <div @click="borrar()" :disabled="disabled" class="pointer">
+        <div @click="borrar()" :disabled="disabled" v-if="!disabled" class="pointer">
             <i class="fas fa-times selecticon1" v-if="selected"></i>
         </div>
         <div class="selected" :class="{ open: open }" @click="open = true">
-            <i class="fas fa-chevron-up selecticon"></i>
+            <i class="fas fa-chevron-up selecticon" v-if="!disabled"></i>
             <input type="text" class="input" v-model="selected" :placeholder="placeholder" :disabled="disabled" @keyup="listar(selected);open=true">
         </div>
-        <div class="items" :class="{ selectHide: !open }" v-if="options.length">
-            <div v-for="(option, i) of options" :key="i"  @click=" selected = option.nombre; open = false; $emit('input', option.id)">
-                {{ option.nombre }}
+        <template v-if="!disabled">
+            <div class="items" :class="{ selectHide: !open }" v-if="options.length">
+                <div v-for="(option, i) of options" :key="i"  @click=" selected = option.nombre; open = false; $emit('input', option.id)">
+                    {{ option.nombre }}
+                </div>
             </div>
-        </div>
-        <div class="items" :class="{ selectHide: !open }" v-else>
-            <div>
-                Sin valores
+            <div class="items" :class="{ selectHide: !open }" v-else>
+                <div>
+                    Sin valores
+                </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 
@@ -55,12 +57,22 @@
                 options: [],
                 selected: "",
                 open: false,
+                valor: this.value,
             };
         },
         methods: {
             async listar(selected){
                 let { data } = await axios.get(route('api.provincia.listar') + '?buscar=' + selected);
                 this.options = data;
+                if(this.valor){
+                    data.forEach(el => {
+                        if(el.id == this.valor){
+                            this.selected = el.nombre;
+                            this.$emit("input", el.id);
+                            return;
+                        }
+                    });
+                }
             },
             salida(e){
                 var container = $(".custom-select");
@@ -72,27 +84,12 @@
                 this.selected = "";
                 this.$emit('input', "");
                 this.open=true;
-                this.listar(this.selected);
-            },
-            recuperar(){
-                let valor = this.value;
-                setTimeout(() => {
-                    if(valor){
-                        this.options.forEach(el => {
-                            if(el.id == valor){
-                                this.selected = el.nombre;
-                                this.$emit("input", el.id);
-                                return;
-                            }
-                        });
-                    }
-                }, 1000);
+                //this.listar(this.selected);
             }
         },
         mounted() {
             this.$emit("input", this.selected);
             this.listar(this.selected);
-            this.recuperar();
             let me = this;
             $(document).on("click",function(e) {
                 me.salida(e);

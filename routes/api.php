@@ -9,6 +9,7 @@ use App\Http\Controllers\MonedasController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\CiudadesController;
 use App\Http\Controllers\PuntosEmisionController;
+use App\Http\Controllers\RolesController;
 
 //Administrar
     //Empresa
@@ -47,17 +48,20 @@ use App\Http\Controllers\PuntosEmisionController;
         Route::delete("/{id}", [UsuariosController::class, "eliminar"])->name("api.usuarios.eliminar")->middleware("permission:usuarios.eliminar");
     });
 
-    //Impuestos
-    /*Route::prefix('/administrar/impuestos')->group(function () {
-        Route::get("", [ImpuestosController::class, "listar"])->name("api.impuestos.listar")->middleware("permission:impuestos.listar");
-        Route::get("/{id}", [ImpuestosController::class, "ver"])->name("api.impuestos.ver")->middleware("permission:impuestos.ver");
-        Route::post("", [ImpuestosController::class, "crear"])->name("api.impuestos.crear")->middleware("permission:impuestos.crear");
-        Route::put("/{id}", [ImpuestosController::class, "editar"])->name("api.impuestos.editar")->middleware("permission:impuestos.editar");
-        Route::delete("/{id}", [ImpuestosController::class, "eliminar"])->name("api.impuestos.eliminar")->middleware("permission:impuestos.eliminar");
-    });*/
+    //Usuarios
+    Route::prefix('/administrar/roles')->group(function () {
+        Route::get("", [RolesController::class, "listar"])->name("api.roles.listar")->middleware("permission:roles.listar");
+        Route::get("/{id}", [RolesController::class, "ver"])->name("api.roles.ver")->middleware("permission:roles.ver");
+        Route::post("", [RolesController::class, "crear"])->name("api.roles.crear")->middleware("permission:roles.crear");
+        Route::put("/{id}", [RolesController::class, "editar"])->name("api.roles.editar")->middleware("permission:roles.editar");
+        Route::delete("/{id}", [RolesController::class, "eliminar"])->name("api.roles.eliminar")->middleware("permission:roles.eliminar");
+    });
 
 
 
+
+    //Permisos
+    Route::get('/permisos/listar', [UsuariosController::class, 'listar_permisos'])->name('api.permisos.listar');
     //Monedas
     Route::get('/moneda', [MonedasController::class, 'listar'])->name('api.moneda.listar');
     //Ciudades

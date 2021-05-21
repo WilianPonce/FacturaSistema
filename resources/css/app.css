@@ -108,3 +108,11 @@
 .spinner svg{
     display: inline-block!important;
 }
+
+.selecticon1{
+    display: none;
+}
+
+.custom-select:hover .selecticon1{
+    display: block;
+}

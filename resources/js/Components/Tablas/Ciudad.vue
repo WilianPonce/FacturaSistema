@@ -1,20 +1,23 @@
 <template>
     <div class="custom-select">
-        <div @click="borrar()" class="pointer"><i class="fas fa-times selecticon1" v-if="selected"></i></div>
+        <div @click="borrar()" class="pointer" v-if="!disabled"><i class="fas fa-times selecticon1" v-if="selected"></i></div>
         <div class="selected" :class="{ open: open }" @click="open = true">
-            <i class="fas fa-chevron-up selecticon"></i>
-            <input type="text" class="input" v-model="selected" :placeholder="placeholder" @keyup="listar();open=true">
+            <i class="fas fa-chevron-up selecticon" v-if="!disabled"></i>
+            <input type="text" class="input" v-model="selected" :placeholder="placeholder" :disabled="disabled" @keyup="listar();open=true">
         </div>
-        <div class="items" :class="{ selectHide: !open }" v-if="options.length">
-            <div v-for="(option, i) of options" :key="i"  @click=" selected = option.nombre; open = false; $emit('input', option.id)">
-                {{ option.nombre }}
+        <template v-if="!disabled">
+            <div class="items" :class="{ selectHide: !open }" v-if="options.length">
+                <div v-for="(option, i) of options" :key="i"  @click=" selected = option.nombre; open = false; $emit('input', option.id)">
+                    {{ option.nombre }}
+                </div>
             </div>
-        </div>
-        <div class="items" :class="{ selectHide: !open }" v-else>
-            <div>
-                Sin valores
+            <div class="items" :class="{ selectHide: !open }" v-else>
+                <div>
+                    Sin valores
+                </div>
             </div>
-        </div>
+            {{provincias}}
+        </template>
     </div>
 </template>
 
@@ -35,7 +38,12 @@
             provincia_id: {
                 required: false,
                 default: false
-            }
+            },
+            disabled: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
         },
         data() {
             return {
@@ -43,45 +51,31 @@
                 selected: "",
                 open: false,
                 buscar:'',
+                valor: this.value,
+                provincia: this.provincia_id
             };
         },
+        computed: {
+            provincias(){
+                let id = this.provincia_id;
+                this.$emit("input", "");
+                this.selected = "";
+                this.listar(id);
+            }
+        },
         methods: {
-            async listar(){
-                const p = new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        resolve(lista(this.provincia_id));
-                    }, 1000);
-                });
-                const recupera = data => {
-                    return new Promise((resolve, reject) => {
-                        if(this.value){
-                            resolve(this.value);
-                        }else{
-                            reject(data);
-                        }
-                    });
-                }
-                const lista = id =>{
-                   return new Promise(async (resolve, reject) => {
-                        let { data } = await axios.get(route('api.ciudad.listar') + '?buscar=' + id);
-                        if(data.length){
-                            this.options = data;
-                            resolve(recupera(data));
-                        }else{
-                            reject("sin valores");
-                        }
-                    });
-                }
-                p.then(async res => {
-                    return res;
-                }).then(async res =>{
+            async listar(id){
+                let { data } = await axios.get(route('api.ciudad.listar') + '?buscar=' + id);
+                this.options = data;
+                if(this.valor){
                     this.options.forEach(el => {
-                        if(el.id === res){
-                            this.$emit("input", res);
+                        if(el.id == this.valor){
                             this.selected = el.nombre;
+                            this.$emit("input", el.id);
+                            return;
                         }
                     });
-                });
+                }
             },
             salida(e){
                 var container = $(".custom-select");
@@ -93,26 +87,11 @@
                 this.selected = "";
                 this.$emit('input', "");
                 this.open=true;
-                this.listar(this.selected);
-            },
-            recuperar(){
-                let valor = this.value;
-                setTimeout(() => {
-                    if(valor){
-                        this.options.forEach(el => {
-                            if(el.id == valor){
-                                this.selected = el.nombre;
-                                this.$emit("input", el.id);
-                                return;
-                            }
-                        });
-                    }
-                }, 1000);
+                //this.listar(this.selected);
             }
         },
         mounted() {
-            this.listar();
-            this.recuperar();
+            this.listar(this.provincia_id);
             let me = this;
             $(document).on("click",function(e) {
                 me.salida(e);

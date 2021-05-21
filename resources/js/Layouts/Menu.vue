@@ -32,12 +32,12 @@
                                 <i class="fa fa-users favics"></i> Usuarios
                             </jet-inertia-link>
                         </li>
+                        <li class="cascas" v-if="permisos.administrar.roles">
+                            <jet-inertia-link :href="route('administrar.roles.listar')" :active="route().current('administrar.roles.listar')" class="rounded-b" as="submenu">
+                                <i class="fa fa-users favics"></i> Roles
+                            </jet-inertia-link>
+                        </li>
                     </ul>
-                </li>
-                <li>
-                    <jet-inertia-link :href="route('usuarios.visualizar')" :active="route().current('usuarios.visualizar')">
-                        <i class="fa fa-users favics" aria-hidden="true"></i> Ejemplos
-                    </jet-inertia-link>
                 </li>
             </ul>
         </nav>
@@ -56,6 +56,7 @@
                         establecimientos: this.can('establecimientos.listar'),
                         puntos_emision: this.can('puntos_emision.listar'),
                         usuarios: this.can('usuarios.listar'),
+                        roles: this.can('roles.listar'),
                     }
                 };
                 this.menus();

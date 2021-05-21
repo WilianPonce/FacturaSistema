@@ -1,25 +1,141 @@
 <template>
     <app-layout v-model="user">
-
+        <form @submit.prevent="guardar()">
+            <div class="shadow sm:rounded-md sm:overflow-hidden" id="shadow">
+                <div class="px-4 py-5 bg-white sm:p-6">
+                    <div class="grid grid-cols-12 gap-6">
+                        <div class="col-span-6 sm:col-span-6">
+                            <label-general for="name" value="nombre" />
+                            <input-general id="name" type="text" class="block w-full capitalize" v-model="form.name" autocomplete="name" />
+                            <error-general :message="form.error('name')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-6">
+                            <label-general for="email" value="Correo electrónico" />
+                            <input-general id="email" type="text" class="block w-full" v-model="form.email" autocomplete="email" />
+                            <error-general :message="form.error('email')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="telefono" value="Teléfono" />
+                            <input-general id="telefono" type="text" class="block w-full" v-model="form.telefono" autocomplete="telefono" />
+                            <error-general :message="form.error('telefono')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="celular" value="Celular" />
+                            <input-general id="celular" type="text" class="block w-full" v-model="form.celular" autocomplete="celular" />
+                            <error-general :message="form.error('celular')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="tipo_sangre" value="Tipo de sangre" />
+                            <input-general id="tipo_sangre" type="text" class="block w-full" v-model="form.tipo_sangre" autocomplete="tipo_sangre" />
+                            <error-general :message="form.error('tipo_sangre')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="direccion" value="Direccion" />
+                            <input-general id="direccion" type="text" class="block w-full capitalize" v-model="form.direccion" autocomplete="direccion" />
+                            <error-general :message="form.error('direccion')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="nombre_familiar" value="Nombre de familiar" />
+                            <input-general id="nombre_familiar" type="text" class="block w-full capitalize" v-model="form.nombre_familiar" autocomplete="nombre_familiar" />
+                            <error-general :message="form.error('nombre_familiar')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="contacto_familiar" value="Contacto de familiar" />
+                            <input-general id="contacto_familiar" type="text" class="block w-full" v-model="form.contacto_familiar" autocomplete="contacto_familiar" />
+                            <error-general :message="form.error('contacto_familiar')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="password" value="Contraseña" />
+                            <input-general id="password" type="password" class="block w-full" v-model="form.password" autocomplete="password" />
+                            <error-general :message="form.error('password')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="confirm_password" value="Confirmar contraseña" />
+                            <input-general id="confirm_password" type="password" class="block w-full" v-model="form.confirm_password" autocomplete="confirm_password" />
+                            <error-general :message="form.error('confirm_password')"/>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label-general for="rol" value="Elegir Rol" />
+                            <select v-model="form.rol" class="form-input shadow-none rounded-none focus:outline-none borde w-full">
+                                <option v-for="tr in roles" :key="tr.id" :value="tr.id">{{tr.name}}</option>
+                            </select>
+                            <error-general :message="form.error('rol')"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-4 py-3 bg-white text-right sm:px-6 pb-6 pt-8">
+                    <inertia-link :href="route('administrar.usuarios.listar')" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Cancelar
+                    </inertia-link>
+                    <button type="submit" :disabled="form.processing" :class="{'spinner':form.processing}" class="inline-block justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <i class="fas fa-spinner fa-spin mr-1 hidden"></i>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
     </app-layout>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout';
-    import Welcome from '@/Jetstream/Welcome';
-    import ModalJet from '@/Jetstream/DialogModal';
-
     export default {
         props:{
-            user: Object
+            user: Object,
+            roles: Array,
+            usuario:Object
         },
-        components: {
-            AppLayout,
-            Welcome,
-            ModalJet,
+        data() {
+            return {
+                form: this.$inertia.form({
+                    '_method': 'POST',
+                    id:null,
+                    name: null,
+                    email: null,
+                    telefono: null,
+                    celular: null,
+                    tipo_sangre: null,
+                    direccion: null,
+                    nombre_familiar: null,
+                    contacto_familiar: null,
+                    password: null,
+                    confirm_password: null,
+                    rol:null,
+                }, {
+                    resetOnSuccess: false,
+                })
+            }
         },
-        mounted(){
-            //this.$inertia.visit(route("administrar.usuarios.editar", 999));
-        }
+        methods: {
+            guardar(){
+                this.form.put(route('api.usuarios.editar', this.form.id), {
+                    preserveScroll: false,
+                    onSuccess: page => {
+                        if (Object.keys(page.props.errors).length === 0) {
+                            this.$alertify.success(this.$page.message);
+                            this.$inertia.visit(route('administrar.usuarios.listar'));
+                        }
+                    },
+                });
+            }
+        },
+        mounted() {
+            this.form = this.$inertia.form({
+                '_method': 'PUT',
+                id: this.usuario.id,
+                name: this.usuario.name,
+                email: this.usuario.email,
+                telefono: this.usuario.telefono,
+                celular: this.usuario.celular,
+                tipo_sangre: this.usuario.tipo_sangre,
+                direccion: this.usuario.direccion,
+                nombre_familiar: this.usuario.nombre_familiar,
+                contacto_familiar: this.usuario.contacto_familiar,
+                password: this.usuario.password,
+                confirm_password: this.usuario.confirm_password,
+                rol: this.usuario.rol,
+            }, {
+                resetOnSuccess: false,
+            })
+        },
     }
 </script>

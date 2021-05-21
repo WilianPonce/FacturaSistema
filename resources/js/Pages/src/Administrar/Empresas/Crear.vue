@@ -100,7 +100,6 @@
                             <ciudad-general v-model="form.ciudad_id" :provincia_id="form.provincia_id"/>
                             <error-general :message="form.error('ciudad_id')" />
                         </div>
-
                         <div class="col-span-6 sm:col-span-6 mt-4">
                             <label-general for="email_facturacion" value="Email para facturación" />
                             <input-general id="email_facturacion" type="text" class="block w-full" v-model="form.email_facturacion"/>
@@ -183,7 +182,7 @@
                                 <div class="col-start-2 col-span-4 cursor-pointer">
                                     <div class="col-span-12 sm:col-span-12 mt-3">
                                         <label-general for="firma_electronica_password" value="Contraseña" />
-                                        <input-general id="firma_electronica_password" type="text" class="block w-full" v-model="form.firma_electronica_password" autocomplete="firma_electronica_password" />
+                                        <input-general id="firma_electronica_password" type="password" class="block w-full" v-model="form.firma_electronica_password" autocomplete="firma_electronica_password" />
                                         <error-general :message="form.error('firma_electronica_password')" />
                                     </div>
                                     <div class="col-span-12 sm:col-span-12 mt-3">
@@ -210,6 +209,7 @@
 </template>
 
 <script>
+    import $ from 'jquery';
     import MonedaGeneral from '@/Components/Tablas/Moneda';
     import CiudadGeneral from '@/Components/Tablas/Ciudad';
     import ProvinciaGeneral from '@/Components/Tablas/Provincia';
@@ -326,6 +326,13 @@
                         if (Object.keys(page.props.errors).length === 0) {
                             this.$alertify.success(this.$page.message);
                             this.$inertia.visit(route('administrar.empresas.listar'));
+                        }else{
+                            setTimeout(() => {
+                                var valor = -($(".text-danger-error:first-child").offset().top);
+                                $("main").animate({
+                                    scrollTop: valor,
+                                }, 500);
+                            }, 50);
                         }
                     },
                 });

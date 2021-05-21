@@ -6,9 +6,34 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Establecimiento;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class EstablecimientosController extends Controller
 {
+    //vistas de establecimientos
+    function listar_render(){
+        return Inertia::render('src/Administrar/Establecimientos/Listar');
+    }
+    function ver_render($id){
+        $response = Establecimiento::where("empresa_id", "=", Auth::User()->empresa_id)->where("id", "=", $id)->first();
+        if(empty($response)){
+            return abort(404);
+        }
+        return Inertia::render('src/Administrar/Establecimientos/Ver', ['response' => $response]);
+    }
+    function crear_render(){
+        return Inertia::render('src/Administrar/Establecimientos/Crear');
+    }
+    function editar_render($id){
+        $response = Establecimiento::where("empresa_id", "=", Auth::User()->empresa_id)->where("id", "=", $id)->first();
+        if(empty($response)){
+            return abort(404);
+        }
+        $response->offsetSet('_method', "PUT");
+        return Inertia::render('src/Administrar/Establecimientos/Editar', ['response' => $response]);
+    }
+
+    //peticiones de establecimientos
     function listar(Request $rq){
         $buscar = str_replace(array(" ", "-", "_"), "%", $rq->buscar);
         $establecimientos = Establecimiento::select('*')

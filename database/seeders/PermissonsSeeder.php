@@ -46,11 +46,11 @@ class PermissonsSeeder extends Seeder
             Permission::create(["name"=>"usuarios.eliminar"]);
 
             //Impuestos
-            Permission::create(["name"=>"impuestos.listar"]);
-            Permission::create(["name"=>"impuestos.ver"]);
-            Permission::create(["name"=>"impuestos.crear"]);
-            Permission::create(["name"=>"impuestos.editar"]);
-            Permission::create(["name"=>"impuestos.eliminar"]);
+            Permission::create(["name"=>"roles.listar"]);
+            Permission::create(["name"=>"roles.ver"]);
+            Permission::create(["name"=>"roles.crear"]);
+            Permission::create(["name"=>"roles.editar"]);
+            Permission::create(["name"=>"roles.eliminar"]);
 
         foreach(range(1, 25) as $cont){
             Role::first()->givePermissionTo(intval($cont));

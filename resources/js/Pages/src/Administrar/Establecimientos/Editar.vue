@@ -86,13 +86,7 @@
             }
         },
         created(){
-            this.form.id = this.response.id;
-            this.form.nombre = this.response.nombre;
-            this.form.serie = this.response.serie;
-            this.form.url_web = this.response.url_web;
-            this.form.nombre_comercial = this.response.nombre_comercial;
-            this.form.direccion = this.response.direccion;
-            this.form.estado = this.response.estado;
+            this.form = this.$inertia.form(this.response, {resetOnSuccess: false,});
         }
     }
 </script>
