@@ -1,0 +1,81 @@
+#modelos, database, factories
+models:
+  #tablas unilaterales
+  Empresa:
+    codigo: integer nullable
+    periodo: integer
+    razon_social: string
+    razon_comercial: string
+    tipo_identificacion: integer
+    identificacion: string
+    direccion: string
+    telefono: string
+    email: email unique
+    email_password: string
+    email_server: string
+    email_port: string
+    email_security: string
+    obligado_contabilidad: boolean
+    contador_nombre: string nullable
+    contador_ruc: string nullable
+    representante_nombre: string nullable
+    representante_ruc: string nullable
+    periodo_inicio: date nullable
+    periodo_fin: date nullable
+    logotipo: string nullable
+    firma_electronica: string nullable
+    firma_electronica_password: string nullable
+    firma_electronica_expiracion: date nullable
+    firma_electronica_actualizacion: date nullable
+    tipo_emision: boolean
+    ambiente: boolean
+    facturar_negativo: boolean
+    moneda_id: id
+    provincia_id: id
+    ciudad_id: id
+    email_facturacion: email nullable
+    leyenda_facturacion: string nullable
+    relationships:
+        hasMany: Establecimiento, Punto_emision
+
+  Establecimiento:
+    codigo: integer nullable
+    nombre: string
+    serie: string
+    url_web: string nullable
+    nombre_comercial: string nullable
+    direccion: string
+    estado: boolean
+    empresa_id: id
+    relationships:
+        hasMany: Punto_emision
+
+  PuntoEmision:
+    codigo: integer nullable
+    nombre: string
+    serie: string
+    factura: string nullable
+    nota_credito: string nullable
+    nota_debito: string nullable
+    guia_remision: string nullable
+    retencion_compra: string nullable
+    liquidacion_compra: string nullable
+    estado: boolean
+    empresa_id: id
+    establecimiento_id: id
+
+
+  #tablas globales
+  Ciudad:
+    codigo: string nullable
+    nombre: string
+    provincia_id: id
+  Provincia:
+    codigo: string nullable
+    nombre: string
+    relationships:
+      hasMany: Ciudad
+  Moneda:
+    nombre: string
+    valor: decimal:14,6 default:0
+

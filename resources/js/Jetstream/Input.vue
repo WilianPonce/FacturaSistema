@@ -1,5 +1,5 @@
 <template>
-    <input class="form-input rounded-md shadow-sm" :value="value" @input="$emit('input', $event.target.value)" ref="input">
+    <input class="form-input shadow-none rounded-none focus:outline-none borde" :value="value" @input="$emit('input', $event.target.value)" ref="input">
 </template>
 
 <script>
@@ -14,3 +14,10 @@
     }
 </script>
 
+<style>
+    .borde{
+        border:none;
+        border-bottom:1px solid #d2d6dc;
+        box-shadow: none!important;
+    }
+</style>

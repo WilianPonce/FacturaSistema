@@ -1,6 +1,6 @@
 <template>
-    <div v-show="message">
-        <p class="text-sm text-red-600">
+    <div v-show="message" v-if="message">
+        <p class="text-sm error-data text-red-600">
             {{ message }}
         </p>
     </div>

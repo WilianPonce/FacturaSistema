@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ahmedsaoud31/laravel-permission-to-vuejs": "dev-master",
+        "blackxel/facturapyme-sdk-php": "dev-master",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -19,12 +20,14 @@
         "laravel/legacy-factories": "^1.1",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "laraveles/spanish": "^1.5",
         "spatie/laravel-permission": "^3.18",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "laravel-shift/blueprint": "^1.20",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"

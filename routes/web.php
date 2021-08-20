@@ -1,12 +1,17 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmpresasController;
+use App\Http\Controllers\EstablecimientosController;
+use App\Http\Controllers\PuntosEmisionController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\RolesController;
+use App\Models\Empresa;
 
 //página principal
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
 //dashboard
     Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function () {
@@ -15,69 +20,41 @@ Route::get('/', function () {
 
 //administrar
     //Empresa
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/listar', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Listar');
-    })->name('administrar.empresa.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/ver', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Ver');
-    })->name('administrar.empresa.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/crear', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Crear');
-    })->name('administrar.empresa.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/empresa/editar', function () {
-        return Inertia\Inertia::render('Administrar/Empresa/Editar');
-    })->name('administrar.empresa.editar');
+    Route::middleware(['auth:sanctum', 'verified'])->prefix('/administrar/empresas/')->group(function () {
+        Route::get('listar', [EmpresasController::class, "listar_render"])->name('administrar.empresas.listar')->middleware("permission:empresas.listar");
+        Route::get('{id}/ver', [EmpresasController::class, "ver_render"])->name('administrar.empresas.ver')->middleware("permission:empresas.ver");;
+        Route::get('crear', [EmpresasController::class, "crear_render"])->name('administrar.empresas.crear')->middleware("permission:empresas.crear");
+        Route::get('{id}/editar', [EmpresasController::class, "editar_render"])->name('administrar.empresas.editar')->middleware("permission:empresas.editar");
+    });
 
     //Establecimeintos
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/listar', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Listar');
-    })->name('administrar.establecimientos.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/ver', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Ver');
-    })->name('administrar.establecimientos.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/crear', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Crear');
-    })->name('administrar.establecimientos.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/establecimientos/editar', function () {
-        return Inertia\Inertia::render('Administrar/Establecimientos/Editar');
-    })->name('administrar.establecimientos.editar');
+    Route::middleware(['auth:sanctum', 'verified'])->prefix('/administrar/establecimientos/')->group(function () {
+        Route::get('listar', [EstablecimientosController::class, "listar_render"])->name('administrar.establecimientos.listar')->middleware("permission:establecimientos.listar");
+        Route::get('{id}/ver', [EstablecimientosController::class, "ver_render"])->name('administrar.establecimientos.ver')->middleware("permission:establecimientos.ver");;
+        Route::get('crear', [EstablecimientosController::class, "crear_render"])->name('administrar.establecimientos.crear')->middleware("permission:establecimientos.crear");
+        Route::get('{id}/editar', [EstablecimientosController::class, "editar_render"])->name('administrar.establecimientos.editar')->middleware("permission:establecimientos.editar");
+    });
 
     //Puntos Emision
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/listar', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Listar');
-    })->name('administrar.puntos-emision.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/ver', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Ver');
-    })->name('administrar.puntos-emision.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/crear', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Crear');
-    })->name('administrar.puntos-emision.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/puntos-emision/editar', function () {
-        return Inertia\Inertia::render('Administrar/Puntos_Emision/Editar');
-    })->name('administrar.puntos-emision.editar');
+    Route::middleware(['auth:sanctum', 'verified'])->prefix('/administrar/puntos-emision/')->group(function () {
+        Route::get('listar', [PuntosEmisionController::class, "listar_render"])->name('administrar.puntos_emision.listar')->middleware("permission:puntos_emision.listar");
+        Route::get('{id}/ver', [PuntosEmisionController::class, "ver_render"])->name('administrar.puntos_emision.ver')->middleware("permission:puntos_emision.ver");
+        Route::get('crear', [PuntosEmisionController::class, "crear_render"])->name('administrar.puntos_emision.crear')->middleware("permission:puntos_emision.crear");
+        Route::get('{id}/editar', [PuntosEmisionController::class, "editar_render"])->name('administrar.puntos_emision.editar')->middleware("permission:puntos_emision.editar");
+    });
 
     //Usuarios
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/listar', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Listar');
-    })->name('administrar.usuarios.listar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/ver', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Ver');
-    })->name('administrar.usuarios.ver');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/crear', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Crear');
-    })->name('administrar.usuarios.crear');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/administrar/usuarios/editar', function () {
-        return Inertia\Inertia::render('Administrar/Usuarios/Editar');
-    })->name('administrar.usuarios.editar');
+    Route::middleware(['auth:sanctum', 'verified'])->prefix('/administrar/usuarios/')->group(function () {
+        Route::get('listar', [UsuariosController::class, "listar_render"])->name('administrar.usuarios.listar')->middleware("permission:usuarios.listar");
+        Route::get('{id}/ver', [UsuariosController::class, "ver_render"])->name('administrar.usuarios.ver')->middleware("permission:usuarios.ver");
+        Route::get('crear', [UsuariosController::class, "crear_render"])->name('administrar.usuarios.crear')->middleware("permission:usuarios.crear");
+        Route::get('{id}/editar', [UsuariosController::class, "editar_render"])->name('administrar.usuarios.editar')->middleware("permission:usuarios.editar");
+    });
 
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/usuarios', function () {
-    return Inertia\Inertia::render('Usuarios/Visualizar');
-})->name('usuarios.visualizar');
-//Funciones de Usuarios
-Route::get("/usuarios/listar", [UsuariosController::class, "listar"])->name("usuarios.listar")->middleware("permission:usuarios.listar");
-Route::post("/usuarios/crear", [UsuariosController::class, "crear"])->name("usuarios.crear")->middleware("permission:usuarios.crear");
-Route::put("/usuarios/editar", [UsuariosController::class, "editar"])->name("usuarios.editar")->middleware("permission:usuarios.editar");
-Route::delete("/usuarios/eliminar/{id}", [UsuariosController::class, "eliminar"])->name("usuarios.eliminar")->middleware("permission:usuarios.eliminar");
-Route::get("/ver", [UsuariosController::class, "ver"])->name("usuarios.ver")->middleware("permission:users.ver");
+    //Roles
+    Route::middleware(['auth:sanctum', 'verified'])->prefix('/administrar/roles/')->group(function () {
+        Route::get('listar', [RolesController::class, "listar_render"])->name('administrar.roles.listar')->middleware("permission:roles.listar");
+        Route::get('{id}/ver', [RolesController::class, "ver_render"])->name('administrar.roles.ver')->middleware("permission:roles.ver");
+        Route::get('crear', [RolesController::class, "crear_render"])->name('administrar.roles.crear')->middleware("permission:roles.crear");
+        Route::get('{id}/editar', [RolesController::class, "editar_render"])->name('administrar.roles.editar')->middleware("permission:roles.editar");
+    });
